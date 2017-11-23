@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import Winner from './Winner';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 class Vote extends Component{
+    constructor(){
+        super();
+        this.mixins = [PureRenderMixin];
+    }
     getPairs(){
         return this.props.pairs || []
     }

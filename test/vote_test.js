@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {renderIntoDocument, scryRenderedDOMComponentsWithTag, Simulate} from 'react-dom/test-utils';
 import {expect} from 'chai';
+import {List} from 'immutable'
 
 describe("Vote", () => {
     it("Vote renders", () => {
@@ -52,5 +53,30 @@ describe("Vote", () => {
         const winner = ReactDOM.findDOMNode(component.winner);
         expect(winner).to.be.ok;
         expect(winner.textContent).to.contain('Transpoinig')
+    });
+    it('отрисовывается как чистый компонент', () => {
+        const container = document.createElement('div');
+        const pairs = ["Transpoinig", "27 days later"];
+        let component = ReactDOM.render(<Voting pairs={pairs} />, container);
+        const btns = scryRenderedDOMComponentsWithTag(component, 'button');
+        expect(btns[0].textContent).to.equal('Transpoinig');
+
+        //теперь изменим массив
+        pairs[0] = '123';
+        component = ReactDOM.render(<Voting pairs={pairs} />, container);
+        expect(btns[0].textContent).to.equal('Transpoinig');
+    });
+    it('перерисовывает DOM при изменении свойства', () => {
+        const container = document.createElement('div');
+        const pairs = List.of("Transpoinig", "27 days later");
+        let component = ReactDOM.render(<Voting pairs={pairs} />, container);
+        let btns = scryRenderedDOMComponentsWithTag(component, 'button');
+        expect(btns[0].textContent).to.equal('Transpoinig');
+
+        //теперь изменим
+        const newPairs = pairs.set(0, 'Sunshine');
+        component = ReactDOM.render(<Voting pairs={newPairs} />, container);
+        btns = scryRenderedDOMComponentsWithTag(component, 'button');
+        expect(btns[0].textContent).to.equal('Sunshine');        
     })
 })
