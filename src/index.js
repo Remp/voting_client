@@ -4,19 +4,22 @@ import {VotingContainer} from './components/Voting';
 import {BrowserRouter, Route} from 'react-router-dom';
 import App from './components/App';
 import {ResultsContainer} from './components/Results';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import reducer from './reducer';
 import {fromJS} from 'immutable';
 import {Provider} from 'react-redux';
 import io from 'socket.io-client';
 import {setState} from './actionCreators';
-
-const store = createStore(reducer);
+import remoteActionMiddleware from './remoteActionMiddleware';
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`)
 socket.on('state', state => {
     store.dispatch(setState(state))
 })
+
+//создаем store с посредником, который будет вызываться прежде попадания действия в store и reducer
+const createStoreWithMiddleWare = applyMiddleware(remoteActionMiddleware)(createStore);
+const store = createStoreWithMiddleWare(reducer);
 
 const routes = (
     <Route component={App}>
