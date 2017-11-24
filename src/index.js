@@ -8,6 +8,7 @@ import {createStore} from 'redux';
 import reducer from './reducer';
 import {fromJS} from 'immutable';
 import {Provider} from 'react-redux';
+import io from 'socket.io-client';
 
 const store = createStore(reducer);
 store.dispatch({
@@ -21,6 +22,8 @@ store.dispatch({
         }
     })
 })
+
+const socket = io(`${location.protocol}//${location.hostname}:8090`)
 
 const routes = (
     <Route component={App}>
