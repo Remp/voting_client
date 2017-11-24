@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {List, Map} from 'immutable';
 import React from 'react';
 import {renderIntoDocument, scryRenderedDOMComponentsWithClass, Simulate} from 'react-dom/test-utils';
-import Results from '../src/components/Results';
+import {Results} from '../src/components/Results';
 
 describe('Results', () => {
     it('рендерит при любом количестве голосов', () => {

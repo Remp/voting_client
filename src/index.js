@@ -1,12 +1,13 @@
 import React from 'react';
 import ReadDOM from 'react-dom';
-import Voting from './components/Voting';
+import {VotingContainer} from './components/Voting';
 import {BrowserRouter, Route} from 'react-router-dom';
 import App from './components/App';
-import Results from './components/Results';
+import {ResultsContainer} from './components/Results';
 import {createStore} from 'redux';
 import reducer from './reducer';
 import {fromJS} from 'immutable';
+import {Provider} from 'react-redux';
 
 const store = createStore(reducer);
 store.dispatch({
@@ -23,14 +24,16 @@ store.dispatch({
 
 const routes = (
     <Route component={App}>
-        <Route path='/results' component={Results} />
-        <Route path='/' component={Voting} />
+        <Route path='/results' component={ResultsContainer} />
+        <Route path='/' component={VotingContainer} />
     </Route>
 )
 
 ReactDOM.render(
-    <BrowserRouter>
-        {routes}
-    </BrowserRouter>,
+    <Provider>
+        <BrowserRouter>
+            {routes}
+        </BrowserRouter>
+    </Provider>,
     document.getElementById("root")
 )
