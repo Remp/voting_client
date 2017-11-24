@@ -46,5 +46,6 @@ describe('Results', () => {
         const winner = ReactDOM.findDOMNode(component.winner);
         expect(winner).to.be.ok;
         expect(winner.textContent).to.contain('Transpoinig');
-    })
+    });
+    
 })

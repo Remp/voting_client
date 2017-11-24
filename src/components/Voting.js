@@ -3,6 +3,7 @@ import Winner from './Winner';
 import Vote from './Vote';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
+import * as actionCreators from '../actionCreators';
 
 export class Voting extends Component{
     constructor(){
@@ -26,7 +27,11 @@ export class Voting extends Component{
 function stateToProps(state){
     return {
         pairs: state.getIn(['vote', 'pairs']),
+        hasVoted: state.get('hasVoted'),
         winner: state.get('winner')
     }
 }
-export const VotingContainer = connect(stateToProps)(Voting);
+
+//вообщем функции из actionCreators будут переданы как свойства, а так как там есть ф-я vote 
+//соответственно она будет вызываться при нажатии проголосовать, и далее идти в store
+export const VotingContainer = connect(stateToProps, actionCreators)(Voting);
