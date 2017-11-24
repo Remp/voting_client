@@ -11,19 +11,14 @@ import {Provider} from 'react-redux';
 import io from 'socket.io-client';
 
 const store = createStore(reducer);
-store.dispatch({
-    type: 'SET_STATE',
-    state: fromJS({
-        vote: {
-            pairs: ["Transpoinig", "27 days later"],
-            tally: {
-                Transpoinig: 1
-            }
-        }
-    })
-})
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`)
+socket.on('state', state => {
+    store.dispatch({
+        type: 'SET_STATE',
+        state: state
+    })
+})
 
 const routes = (
     <Route component={App}>
