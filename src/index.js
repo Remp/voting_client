@@ -1,10 +1,20 @@
 import React from 'react';
 import ReadDOM from 'react-dom';
-import Vote from './components/Vote'
+import Voting from './components/Voting';
+import {BrowserRouter, Route} from 'react-router-dom';
+import App from './components/App';
+import Results from './components/Results';
 
-const pairs = ["Transpoinig", "27 days later"];
+const routes = (
+    <Route component={App}>
+        <Route path='/results' component={Results} />
+        <Route path='/' component={Voting} />
+    </Route>
+)
 
 ReactDOM.render(
-    <Vote pairs={pairs} hasVoted='Transpoinig'/>,
+    <BrowserRouter>
+        {routes}
+    </BrowserRouter>,
     document.getElementById("root")
 )

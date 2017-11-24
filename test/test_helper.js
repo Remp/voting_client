@@ -1,8 +1,6 @@
-import jsdom  from 'jsdom';
+import {JSDOM}  from 'jsdom';
 import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
-
-const {JSDOM} = jsdom;
 
 const {window} = new JSDOM('<!doctype html><html><body></body></html>');
 const {document} = window;
