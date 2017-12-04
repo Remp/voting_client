@@ -4,6 +4,7 @@ import Vote from './Vote';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import * as actionCreators from '../actionCreators';
+import PropTypes from 'prop-types';
 
 export class Voting extends Component{
     constructor(){
@@ -25,6 +26,8 @@ export class Voting extends Component{
     }
 }
 function stateToProps(state){
+    console.log('in voting component')
+    console.log(state.toJS());
     return {
         pairs: state.getIn(['vote', 'pairs']),
         hasVoted: state.get('hasVoted'),

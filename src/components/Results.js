@@ -45,6 +45,7 @@ export class Results extends Component{
     }
 }
 function stateToProps(state){
+    console.log('in state to props');
     return {
         pairs: state.getIn(['vote', 'pairs']),
         winner: state.get('winner'),

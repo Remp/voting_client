@@ -1,5 +1,5 @@
 import React from 'react';
-import ReadDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 import {VotingContainer} from './components/Voting';
 import {BrowserRouter, Route} from 'react-router-dom';
 import App from './components/App';
@@ -11,28 +11,40 @@ import {Provider} from 'react-redux';
 import io from 'socket.io-client';
 import {setState} from './actionCreators';
 import remoteActionMiddleware from './remoteActionMiddleware';
+import {Map, List} from 'immutable';
 
-const socket = io(`${location.protocol}//${location.hostname}:8090`)
+
+const socket = io('http://localhost:7000');
 socket.on('state', state => {
-    store.dispatch(setState(state))
-})
+        console.log('state emitted');
+        console.log(setState(state));
+        console.log(store);
+        store.dispatch(setState(state));
+        console.log('state emit end')
+});
+const store = createStore(reducer, applyMiddleware(middleware));
+// const createStoreWithMiddleWare = applyMiddleware(socket => store => next => action => {
+//     console.log('in middleware');
+//     if (action.meta.remote)
+//         socket.emit('action', action);
+//     return next(action);
+// })(createStore);
+// const store = createStoreWithMiddleWare(reducer);
 
-//создаем store с посредником, который будет вызываться прежде попадания действия в store и reducer
-const createStoreWithMiddleWare = applyMiddleware(remoteActionMiddleware)(createStore);
-const store = createStoreWithMiddleWare(reducer);
-
-const routes = (
-    <Route component={App}>
-        <Route path='/results' component={ResultsContainer} />
-        <Route path='/' component={VotingContainer} />
-    </Route>
-)
 
 ReactDOM.render(
-    <Provider>
+    <Provider store={store}>
         <BrowserRouter>
-            {routes}
+            <Route component={App}/>       
         </BrowserRouter>
     </Provider>,
     document.getElementById("root")
 )
+
+function middleware({getState, dispatch}){
+    return next => action => {
+        if (action.meta && action.meta.remote)
+            socket.emit('action', action);
+        return next(action);
+    }
+}

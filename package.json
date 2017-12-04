@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "immutable": "^3.8.2",
+    "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-addons-pure-render-mixin": "^15.6.2",
     "react-addons-test-utils": "^15.6.2",
@@ -36,7 +37,9 @@
   },
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js \"test/**/*@(.js|.jsx)\"",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "build": "webpack",
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
