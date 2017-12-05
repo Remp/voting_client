@@ -17,6 +17,10 @@ class Vote extends Component{
     hasVotedFor(entry){
         return this.props.hasVoted === entry
     }
+    commitVote(vote){
+        this.props.vote(vote);
+        this.props.history.push('/results');
+    }
     render(){
         return (
             <div className='voting'>
@@ -28,7 +32,7 @@ class Vote extends Component{
                     this.getPairs().map(vote => {
                         return (
                             <button 
-                                onClick={() => this.props.vote(vote)} 
+                                onClick={() => this.commitVote(vote)} 
                                 key={vote}
                                 disabled={this.isDisabled()}
                             >

@@ -23,14 +23,6 @@ socket.on('state', state => {
         console.log('state emit end')
 });
 const store = createStore(reducer, applyMiddleware(middleware));
-// const createStoreWithMiddleWare = applyMiddleware(socket => store => next => action => {
-//     console.log('in middleware');
-//     if (action.meta.remote)
-//         socket.emit('action', action);
-//     return next(action);
-// })(createStore);
-// const store = createStoreWithMiddleWare(reducer);
-
 
 ReactDOM.render(
     <Provider store={store}>
