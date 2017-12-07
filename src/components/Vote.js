@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Winner from './Winner';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import PropTypes from 'prop-types';
+import '../styles/Vote.css';
 
 class Vote extends Component{
     constructor(){
@@ -22,7 +23,7 @@ class Vote extends Component{
     }
     render(){
         return (
-            <div className='voting'>
+            <div className='vote'>
                 {
                     this.props.winner
                     ?
@@ -30,20 +31,14 @@ class Vote extends Component{
                     :
                     this.getPairs().map(vote => {
                         return (
-                            <button 
+                            <div 
                                 onClick={() => this.commitVote(vote)} 
                                 key={vote}
                                 disabled={this.isDisabled()}
+                                className={this.hasVotedFor(vote) ? 'vote-item checked': 'vote-item'}
                             >
-                                <h2>{vote}</h2>
-                                {
-                                    this.hasVotedFor(vote)
-                                    ?
-                                    <div className="lable">Voted</div>
-                                    :
-                                    null
-                                }
-                            </button>
+                                {vote}
+                            </div>
                         )
                     })
                 }

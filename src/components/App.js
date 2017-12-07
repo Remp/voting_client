@@ -3,6 +3,7 @@ import {List, Map} from 'immutable';
 import {ResultsContainer} from './Results';
 import {VotingContainer} from './Voting';
 import {Route, Switch} from 'react-router';
+import '../styles/App.css';
 
 const pairs = List.of("Transpoinig", "27 days later");
 const tally = new Map({
@@ -13,7 +14,7 @@ const tally = new Map({
 class App extends Component{
     render(){
         return (
-            <div>
+            <div className='app'>
                 <Switch>
                     <Route path='/results' component={ResultsContainer} />
                     <Route path='/' component={VotingContainer} />

@@ -5,6 +5,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import * as actionCreators from '../actionCreators';
 import PropTypes from 'prop-types';
+import '../styles/Voting.css';
 
 export class Voting extends Component{
     constructor(){
@@ -13,7 +14,7 @@ export class Voting extends Component{
     }
     render(){
         return (
-            <div>
+            <div className='voting'>
                 {
                     this.props.winner
                     ?

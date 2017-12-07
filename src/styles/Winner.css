@@ -1,0 +1,9 @@
+.winner{
+    display: flex;
+    flex: 1;
+    background-color: #5937ee;
+    color: white;
+    font-size: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
