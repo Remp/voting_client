@@ -19,7 +19,6 @@ class Vote extends Component{
     }
     commitVote(vote){
         this.props.vote(vote);
-        this.props.history.push('/results');
     }
     render(){
         return (

@@ -17,7 +17,7 @@ function setState(state, newState){
 function resetVote(state){
     const hasVoted = state.get('hasVoted');
     const pairs = state.getIn(['vote', 'pairs'], new List());
-    if (hasVoted && !pairs.includes(hasVoted))
+    if ((hasVoted && !pairs.includes(hasVoted)) || state.get('entries').count() < 1)
         return state.remove('hasVoted')
     return state
 }
