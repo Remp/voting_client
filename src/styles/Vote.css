@@ -1,0 +1,28 @@
+.vote{
+    flex: 1;
+    display: flex;
+    color: white;
+    font-size: 1.5rem;
+    flex-direction: column;
+}
+.vote-item{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.vote-item:hover{
+    transform: scale(1.01)
+}
+.vote-item.checked{
+    background-color: #0a1dca;
+    transform: scale(1.01)
+}
+.vote-item:nth-child(even){
+    background-color: #372196
+}
+.vote-item:nth-child(odd){
+    background-color: #5937ee
+}
