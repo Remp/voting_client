@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Winner from './Winner';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import PropTypes from 'prop-types';
 import '../styles/Vote.css';
 
 class Vote extends Component{
